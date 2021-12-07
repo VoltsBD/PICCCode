@@ -1,0 +1,34 @@
+void main() {
+  //  I/O Assignment:
+  //  RB0-RB7 = 7 Segment
+  //  RA0 = Turns on (0) and Off (1) Segment 1
+  //  RA1 = Turns on (0) and off (1) Segment 2
+  int j=0;
+  int i=0;
+  int n=i+1;
+  int ones, tens;
+  int outs [10] = {63, 6, 91, 79, 102, 109,  125, 7, 127, 103} ;
+  // setup of output ports
+  // My Seven Segment is on RB0 to RB6
+  TRISB = 0;
+  // My control line is RA0 (7Seg Ones) RA1 (7 Seg Tens)
+  // Common Anode To turn on the 7 Seg it has to be zero 
+  //              To Turn it off it has to be one
+  TRISA =0;
+  ones = 0;
+  tens = 0;
+  while(j<25){
+  tens = j/10;
+  ones = j - (tens*10);
+  
+  PORTB=outs[ones];  // Zero for Ones
+  PORTA=14;  // Turn on 7Seg One      B1110 = D12 + D2 = D14
+
+  PORTB=outs[tens];  // Zero for Ones
+  PORTA=13;  // Turn on 7Seg Tens  B1101= D12+D1
+
+  if(J<100) { j++; }
+  else {j=0;}
+  }
+  
+}
